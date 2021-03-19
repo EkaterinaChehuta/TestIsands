@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<strong th:text="${post.postName}"></strong>
+<strong th:text="${post.archived} ? 'в архиве' : 'не в архиве'"></strong>
+<table border="1">
+    <tr>
+        <th>ФИО</th>
+        <th>Должность</th>
+    </tr>
+    <tr th:each="employee: ${employees}">
+        <td th:text="${employee.lastName}"></td>
+        <td th:text="${employee.post.postName}"></td>
+    </tr>
+</table>
+<form method="post" th:action="@{/save/{post_id}(post_id = ${post.id})}">
+    <button type="submit">Изменить</button>
+</form>
+<form method="post" th:action="@{/notSave}">
+    <button type="submit">Не изменять</button>
+</form>
+</body>
+</html>

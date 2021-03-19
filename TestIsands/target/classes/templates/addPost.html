@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form method="post" th:action="@{/addPost}" th:object="${post}">
+    <label>Название должности</label>
+    <input type="text" required placeholder="Введите название должности"
+           th:field="*{postName}">
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>

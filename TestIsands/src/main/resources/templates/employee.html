@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form method="get" th:action="@{/employeeNotArchived}">
+    <button type="submit">Показать не архивных</button>
+</form>
+<form method="get" th:action="@{/employeeArchived}">
+    <button type="submit">Показать архивных</button>
+</form>
+<form method="get" th:action="@{/employee}">
+    <button type="submit">Показать всех</button>
+</form>
+<table border="1">
+    <tr>
+        <th>ФИО</th>
+        <th>Дата рождения</th>
+        <th>Должность</th>
+        <th>Дата трудоустройства</th>
+        <th>Номера телефонов</th>
+        <th>Банк</th>
+        <th>Зарплата</th>
+        <th>Статус архивности</th>
+        <th>Действие</th>
+    </tr>
+    <tr th:each="employee: ${employees}">
+        <td th:text="${employee.lastName} + ' ' +
+                     ${#strings.abbreviate(employee.firstName, 4)}"></td>
+        <td th:text="${employee.dateOfBirth}"></td>
+        <td th:text="${employee.post.postName}"></td>
+        <td th:text="${employee.dateOfEmployment}"></td>
+        <td th:text="'моб.' + ${employee.mobilePhoneNumber}"></td>
+        <td th:text="${employee.bank.bankName}"></td>
+        <td th:text="${employee.salary}"></td>
+        <td th:text="${employee.archived} ? 'В архиве' : 'Не в архиве'"></td>
+        <td>
+            <form th:action="@{/editEmployee/{employee_id}(employee_id = ${employee.id})}" th:method="get">
+                <button type="submit">Редактировать данные</button>
+            </form>
+            <form method="post" th:action="@{/archivedEmployee/{employee_id}(employee_id = ${employee.id})}">
+                <button type="submit">Изменить статус архивности</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

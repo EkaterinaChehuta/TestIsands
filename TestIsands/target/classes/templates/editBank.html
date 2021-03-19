@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<strong>Редактирование банка</strong>
+<form method="post" th:action="@{/editBank/{bank_id}(bank_id = ${bank.id})}" th:object="${bank}">
+    <div>
+        <label>БИК</label>
+        <input type="text" placeholder="Введите БИК" name="bik">
+    </div>
+    <div>
+        <strong>Адрес:</strong>
+        <div>город <input type="text" placeholder="Введите название города" name="city"></div>
+        <div>улица <input type="text" placeholder="Введите название улицы" name="street"></div>
+        <div>дом <input type="text" placeholder="Введите номер дома" name="houseNumber"></div>
+    </div>
+    <button type="submit">Сохранить</button>
+</form>
+<strong>Список клиентов банка.</strong>
+<table border="1">
+    <tr>
+        <th>ФИО</th>
+        <th>Зарплата</th>
+    </tr>
+    <tr th:each="employee: ${employees}">
+        <td th:text="${employee.lastName} + ' ' + ${employee.firstName} + ' ' + ${employee.patronymic}"></td>
+        <td th:text="${employee.salary}"></td>
+    </tr>
+</table>
+</body>
+</html>

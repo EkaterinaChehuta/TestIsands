@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form method="post" th:action="@{/addEmployee}" th:object="${employee}">
+<div><label>Личная информация</label>
+    <div>
+        <div>Фамилия <input type="text" required placeholder="Введите фамилию"
+                            th:field="*{lastName}"></div>
+        <div>Имя <input type="text" required placeholder="Введите имя"
+                        th:field="*{firstName}"></div>
+        <div>Отчество <input type="text" required placeholder="Введите отчество"
+                             th:field="*{patronymic}"></div>
+    </div>
+    <div><label>Пол</label>
+        <select required th:field="*{gender}">
+            <option value="М">Мужской</option>
+            <option value="Ж">Женский</option>
+        </select>
+    </div>
+    <div><label>Дата рождения</label>
+        <input type="date" required placeholder="Введите дату рождения"
+               th:field="*{dateOfBirth}">
+    </div>
+</div>
+<div><label>Рабочая информация</label>
+    <div>
+        <div><label>Должность</label>
+            <select required th:field="*{post}">
+                <option th:each="post: ${posts}"
+                        th:value="${post.id}"
+                        th:text="${post.postName}"></option>
+            </select>
+        </div>
+        <div><label>Дата трудоустройства</label>
+            <input type="date" required placeholder="Введите дату трудоустройства"
+                   th:field="*{dateOfEmployment}">
+        </div>
+        <div><label>Номер телефона</label>
+            <div>Мобильный <input type="text" maxlength="11" minlength="11"
+                                  th:field="*{mobilePhoneNumber}"></div>
+        </div>
+    </div>
+    <div>
+        <div><label>Банк</label>
+            <select required th:field="*{bank}">
+                <option th:each="bank: ${banks}"
+                        th:value="${bank.id}"
+                        th:text="${bank.bankName}"></option>
+            </select>
+        </div>
+        <div><label>Зарплата</label>
+            <input type="text" required placeholder="Зарплата"
+                   th:field="*{salary}">
+        </div>
+    </div>
+</div>
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>

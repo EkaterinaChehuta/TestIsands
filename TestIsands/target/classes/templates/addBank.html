@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form method="post" th:action="@{/addBank}" th:object="${bank}">
+    <div>
+        <strong>Название банка</strong>
+        <input type="text" required placeholder="Введите название банка"
+               th:field="*{bankName}">
+    </div>
+    <div>
+        <strong>БИК</strong>
+        <input type="text" required placeholder="Введите БИК"
+               th:field="*{bik}">
+    </div>
+    <div>
+        <strong>Адрес:</strong>
+        <div>город <input type="text" required placeholder="Введите название города" th:field="*{city}"></div>
+        <div>улица <input type="text" required placeholder="Введите название улицы" th:field="*{street}"></div>
+        <div>дом   <input type="text" required placeholder="Введите номер дома" th:field="*{houseNumber}"></div>
+    </div>
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>

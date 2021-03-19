@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div>
+    <form method="post" th:action="@{/editEmployee/{employee_id}(employee_id = ${employee.id})}"
+          th:object="${employee}">
+        <div><label>Личная информация</label>
+            <div>
+                <div>Фамилия <strong th:text="${employee.lastName}"></strong>
+                    <input type="text" placeholder="Введите фамилию" name="lastName"></div>
+                <div>Имя <strong th:text="${employee.firstName}"></strong>
+                    <input type="text" placeholder="Введите имя" name="firstName"></div>
+                <div>Отчество <strong th:text="${employee.patronymic}"></strong>
+                    <input type="text" placeholder="Введите отчество" name="patronymic"></div>
+            </div>
+            <div>Пол <strong th:text="${employee.gender}"></strong>
+                <select name="gender">
+                    <option value="0" selected disabled>--</option>
+                    <option value="М">Мужской</option>
+                    <option value="Ж">Женский</option>
+                </select>
+            </div>
+            <div>Дата рождения <strong th:text="${employee.dateOfBirth}"></strong>
+                <input type="date" placeholder="Введите дату рождения" name="dateOfBirth">
+            </div>
+        </div>
+        <div>Рабочая информация
+            <div>
+                <div>Должность <strong th:text="${employee.post.postName}"></strong>
+                    <select name="postId">
+                        <option value="0" selected disabled>--</option>
+                        <option th:each="post: ${posts}"
+                                th:value="${post.id}"
+                                th:text="${post.postName}"></option>
+                    </select>
+                </div>
+                <div>Дата трудоустройства <strong th:text="${employee.dateOfEmployment}"></strong>
+                    <input type="date" placeholder="Введите дату трудоустройства" name="dateOfEmployment">
+                </div>
+                <div><label>Номер телефона</label>
+                    <div>Мобильный <input type="text" maxlength="11" minlength="11" name="mobilePhoneNumber"></div>
+                </div>
+            </div>
+            <div>Банк <strong th:text="${employee.bank.bankName}"></strong>
+                <select name="bankId">
+                    <option value="0" selected disabled>--</option>
+                    <option th:each="bank: ${banks}"
+                            th:value="${bank.id}"
+                            th:text="${bank.bankName}"></option>
+                </select>
+            </div>
+            <div>Зарплата <strong th:text="${employee.salary}"></strong>
+                <input type="text" placeholder="Зарплата" name="salary">
+            </div>
+        </div>
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>Название банка</th>
+            <th>БИК</th>
+            <th>Адрес</th>
+            <th>Действие</th>
+        </tr>
+        <tr th:each="bank: ${banks}">
+            <td th:text="${bank.bankName}"></td>
+            <td th:text="${bank.bik}"></td>
+            <td th:text="'г.' + ${bank.city} + ', ул.' + ${bank.street} + ' дом №' + ${bank.houseNumber}"></td>
+            <td>
+                <form th:action="@{/editBank/{bank_id}(bank_id = ${bank.id})}" th:method="get">
+                    <button type="submit">Редактировать</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

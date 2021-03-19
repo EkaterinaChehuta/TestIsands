@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th colspan="2">Название должности</th>
+        <th>Статус архивности</th>
+        <th>Действие</th>
+    </tr>
+    <tr th:each="post: ${posts}">
+        <td th:text="${post.postName}"></td>
+        <td>
+            <label>Изменить название: </label> <!-- изменить название -->
+            <form method="post" th:action="@{/post/{post_id}(post_id = ${post.id})}">
+                <input type="text" name="postName">
+                <button type="submit">Сохранить</button>
+            </form>
+        </td>
+        <td th:text="${post.archived} ? 'В архиве' : 'Не в архиве'"></td>
+        <td>
+
+            <form method="post" th:action="@{/archivedPost/{post_id}(post_id = ${post.id})}">
+                <button type="submit">Изменить статус архивности</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
